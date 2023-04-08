@@ -1,11 +1,10 @@
-//import PropTypes from "prop-types";
 import css from "./ContactList.module.css";
 
 import { useSelector,useDispatch } from "react-redux";
 import {getContacts} from "../../../redux/selectors";
 import { delContact} from "redux/actions";
 
-export default function ContactList({btnFunction}){
+export default function ContactList(){
     const dataList=useSelector(getContacts);
     const dispatch=useDispatch();
 
@@ -38,5 +37,3 @@ export default function ContactList({btnFunction}){
         </ul>
     );
 }
-
-//export default ContactList;
