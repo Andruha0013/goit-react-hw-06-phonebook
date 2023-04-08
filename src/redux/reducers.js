@@ -60,13 +60,13 @@ export const filterReducer=(state=initFilterlState,action)=>{
     }
     return state;
     
-    
+}  
     /*switch(action.type){
         case "filter/setFilter":
             return action.payload;
         default: return state;
     }*/
-}
+
 
 /*export const contactsReducer=(state = initConstactsState, action)=>{
     switch(action.type){
