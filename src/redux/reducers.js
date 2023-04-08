@@ -1,4 +1,5 @@
 import LocalStorApp from "../components/myLib/LocalStorApp";
+import { createAction, createReducer } from '@reduxjs/toolkit'
 
 
 const myStorage=new LocalStorApp("phoneBook");
@@ -21,11 +22,14 @@ function checkEqualStr(val1,val2){
     }
     
 }
+//------------------------------------------------------------------------------
+const addContact=createAction("contacts/addContact");
+const delContact=createAction("contacts/delContact");
+const setFilter=createAction("filter/setFilter");
 
-export const contactsReducer=(state = initConstactsState, action)=>{
-        //----------------add-contact------------------------------------------
-        if(action.type==="contacts/addContact"){
-        //console.log(state);
+export const contactsReducer=createReducer(initConstactsState,(builder)=>{
+    builder
+        .addCase(addContact,(state,action)=>{
             if(state.findIndex((item)=>{
                 if(checkEqualStr(action.payload.name,item.name)){
 
@@ -39,33 +43,40 @@ export const contactsReducer=(state = initConstactsState, action)=>{
                 }
                 return false;
             })<0){
-                myStorage.setData(state); 
+                myStorage.setData([...state,action.payload]); 
                 return [...state,action.payload];
             }
-        }
-        //-----------------------del-contact-----------------------------------
-        if(action.type==="contacts/delContact"){
-            myStorage.setData(state); 
+        })
+        .addCase(delContact,(state,action)=>{
+            myStorage.setData(state.filter(contact=>contact.id!==action.payload)); 
             return state.filter(contact=>contact.id!==action.payload);
-        }
-            
-        //====================================================================
-        return state;
-    
-};
+        })
+        .addDefaultCase((state, action) => {
+            return state;
+        });
+});
+
+export const filterReducer=createReducer(initFilterlState,(builder)=>{
+    builder
+        .addCase(setFilter,(state,action)=>{
+            return action.payload;
+        })
+        .addDefaultCase((state,action)=>{
+            return state;
+        });
+});
+
+
+
 //------------------------filter-----------------------------------------------
-export const filterReducer=(state=initFilterlState,action)=>{
-    if(action.type==="filter/setFilter"){
-        return action.payload;
-    }
-    return state;
-    
-}  
+/*export const filterReducer=(state=initFilterlState,action)=>{
     /*switch(action.type){
         case "filter/setFilter":
             return action.payload;
         default: return state;
-    }*/
+    }
+}  */
+    
 
 
 /*export const contactsReducer=(state = initConstactsState, action)=>{
