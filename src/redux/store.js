@@ -2,7 +2,7 @@
 //import { devToolsEnhancer } from "@redux-devtools/extension";
 
 import { configureStore } from "@reduxjs/toolkit";
-import { rootReducer,contactsReducer, filterReducer } from "./reducers";
+import { contactsReducer, filterReducer } from "./reducers";
 
 
 // Початкове значення стану Redux для кореневого редюсера,
