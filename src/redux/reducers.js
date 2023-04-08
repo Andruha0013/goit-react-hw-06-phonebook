@@ -89,9 +89,15 @@ export const contactsReducer=(state = initConstactsState, action)=>{
 };
 //------------------------filter-----------------------------------------------
 export const filterReducer=(state=initFilterlState,action)=>{
-    switch(action.type){
-        case "filter/setFilter":
-            return action.payload;break;
-        default: return state;
+    if(action.type==="filter/setFilter"){
+        return action.payload;
     }
+    return state;
+    
+    
+    /*switch(action.type){
+        case "filter/setFilter":
+            return action.payload;
+        default: return state;
+    }*/
 }
