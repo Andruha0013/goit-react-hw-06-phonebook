@@ -3,9 +3,9 @@ import { createAction, createReducer } from '@reduxjs/toolkit';
 
 const myStorage = new LocalStorApp('phoneBook');
 
-var initConstactsState = myStorage.getData();
-if (initConstactsState === false || initConstactsState === null) {
-  initConstactsState = [];
+var initContactsState = myStorage.getData();
+if (initContactsState === false || initContactsState === null) {
+  initContactsState = [];
 }
 
 const initFilterlState = '';
@@ -22,7 +22,7 @@ const addContact = createAction('contacts/addContact');
 const delContact = createAction('contacts/delContact');
 const setFilter = createAction('filter/setFilter');
 
-export const contactsReducer = createReducer(initConstactsState, builder => {
+export const contactsReducer = createReducer(initContactsState, builder => {
   builder
     .addCase(addContact, (state, action) => {
       if (
